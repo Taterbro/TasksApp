@@ -1,0 +1,28 @@
+{% extends '_partials/base.html' %}
+
+
+{% block title %}
+
+Edit
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+{% include '_partials/messages.html' %}
+
+
+        
+       <h2>Edit Task</h2>
+       <form class="ui form" method="POST" action="{%url 'edittask' todo.id %}">
+              {% csrf_token %}
+
+              {{form.as_p}}
+              <input type="submit" class="ui button primary" value="Save">
+       </form>
+       
+
+{% endblock %}

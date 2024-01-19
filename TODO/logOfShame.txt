@@ -1,0 +1,45 @@
+security key cannot be empty
+cause: was using 'os' to reference the security key in .env
+fix: installed decouple and used that to reference the file instead
+
+todo/index.html does not exist
+cause: received this error while trying to change the templates path to the root folder
+fix: used 'TEMPLATES_DIR = os.path.join(BASE_DIR, 'TODO', 'templates')' and inserted TEMPLATES_DIR inside the 
+BASE_DIR variable
+
+django.db.migrations.exceptions.InconsistentMigrationHistory: Migration admin.0001_initial is applied before its 
+dependency authenticate.0001_initial on database 'default'.
+cause: tried to make a custom user model and got this error every time i tried to migrate. I think i got the error
+because i applied migrations before making a custom user model.
+fix: deleted the migration file in authenticate and deleted the db.sqlite3 file in the root and made migrations 
+again using the terminal and migrated them.
+
+todolist.todoList: (models.E014) 'ordering' must be a tuple or list (even if you want to order by only one field).
+cause: didn't add a comma after a variable in parentheses and python thought it wasn't a list.
+fix: added a comma after the one thing in the parentheses
+
+not really a problem but i couldn't see the taskform in the html page when it got rendered
+cause: i imported todolist instead of taskform in the views.py
+fix: import taskform(the modelform) Instead of todolist(the model itself)
+
+NoReverseMatch at /addtask
+cause: tried to make a reverse http thing, idk, but it's not working as it should be.
+fix: i changed the name of the path to the url i was referencing in my views.py. the url should have the same name
+as what is being referenced. Not the url itself, the url NAME.
+
+Server error(500) when debug = false
+omg, i finally fixed it! this took like three whole days and it was just bad syntax lmao
+cause: tried to make a custom 404 page but got a 500 error because i didn't properly write the path for the template
+in the global views.py file
+fix: properly write the path obvi. i wrote '500.html' instead of 'todolist/500.html'. same applies to 400
+
+OperationalError at /
+no such column: todolist_todolist.owner_id
+cause: tried to assign a model owner to a foreign key
+attempted: deleted the sql database and migrated again but got this error instead
+TypeError at /
+Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x00000218B1CC5790>>.
+FIX: deleted the sql database AND all the migrations. i think i made a change after the migration, so it didn't
+register, but that fixed... fixed this mostly myself btw hehe. i'm a proud boy rn
+
+

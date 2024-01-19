@@ -1,0 +1,50 @@
+{% extends '_partials/base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Todo: {{todo.title}}
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+        
+       <h2 class="ui header">Task Details</h2>
+
+       {% include '_partials/messages.html' %}
+
+       <div class="ui card">
+              <div class="content">
+                     <div class="header">{{todo.title}}</div>
+                     <div class="meta">{{todo.createdAt}}</div>
+                     <div class="description">
+                            <p>Description</p>
+                     </div>
+              </div>
+              <div class="extra content">
+
+                     {% if todo.isCompleted %}
+                     <p>
+                            <i class="check icon green"></i>
+                            Completed at {{todo.updatedAt}}
+                     </p>
+                     {% else %}
+                     <p>
+                            Pending...
+                     </p>
+                     {% endif %}
+                     <a href="{% url 'edittask' todo.id %}" class="ui button primary">Edit</a>
+                     <a href="{% url 'todoDel' todo.id %}" class="ui button primary">Delete task</a>
+              </div>
+
+       </div>
+       
+       
+
+{% endblock %}
+    
