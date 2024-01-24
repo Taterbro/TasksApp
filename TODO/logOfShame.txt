@@ -42,4 +42,5 @@ Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.mod
 FIX: deleted the sql database AND all the migrations. i think i made a change after the migration, so it didn't
 register, but that fixed... fixed this mostly myself btw hehe. i'm a proud boy rn
 
-
+not even an error, the key to activate a user just isn't working
+fix; it was a syntax error on my part. I wrote 'user.objects.get' instead of 'User.objects.get'

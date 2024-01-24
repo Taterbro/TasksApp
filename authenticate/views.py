@@ -51,10 +51,20 @@ def register(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         password2 = request.POST.get('password2')
+        special = []
 
         if len(password) < 6:
             messages.add_message(request, messages.ERROR, 'Password length must be greater than 6')
             context['haserror'] = True
+        
+        if not password.isalnum():
+             messages.add_message(request, messages.ERROR, 'Passwords should have a mix of numbers, uppercase and lowercase characters')
+             context['haserror'] = True
+
+        if password.islower() or password.isupper() or password.isdigit():
+            messages.add_message(request, messages.ERROR, 'Passwords should have a mix of numbers, uppercase and lowercase characters')
+            context['haserror'] = True
+            
 
         if password != password2:
             messages.add_message(request, messages.ERROR, 'Passwords are not similar')
@@ -82,6 +92,7 @@ def register(request):
         user=User.objects.create(username=username, email=email)
         user.set_password(password)
         user.save()
+        
         
         sendactivemail(user, request)
 
@@ -137,7 +148,7 @@ def activateuser(request, uidb64, token):
     try:
         uid=force_str(urlsafe_base64_decode(uidb64))
 
-        user=user.objects.get(pk=uid)
+        user=User.objects.get(pk=uid)
 
     except Exception as e:
         user=None
